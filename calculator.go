@@ -1,27 +1,34 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
+	"strconv"
 )
 
 func main() {
 
+	var inp1, inp2 interface{}
+
 	var num1, num2 int
 
+	var err error
+	sign := ""
 	fmt.Println("Which operation you want to perform : +/-/*/%")
-
-	reader := bufio.NewReader(os.Stdin)
-	sign, _ := reader.ReadString('\n')
+	fmt.Scan(&sign)
 
 	switch sign {
 	case "+":
-		fmt.Println("Enter the numbers")
+		fmt.Println("Enter the numbers ")
 
-		if _, err := fmt.Scanf("%d %d", &num1, &num2); err != nil {
-			log.Print("  Scan for num1 & num2 failed, due to ", err)
+		fmt.Scan(&inp1, &inp2)
+
+		if num1, err = strconv.Atoi(inp1.(string)); err != nil {
+			fmt.Println("First input parameter must be integer")
+			return
+		}
+
+		if num2, err = strconv.Atoi(inp2.(string)); err != nil {
+			fmt.Println("Second input parameter must be integer")
 			return
 		}
 
@@ -30,30 +37,24 @@ func main() {
 	case "-":
 		fmt.Println("Enter the numbers")
 
-		if _, err := fmt.Scanf("%d %d", &num1, &num2); err != nil {
-			log.Print("  Scan for num1 & num2 failed, due to ", err)
-			return
-		}
+		fmt.Scan(&num1, &num2)
 
 		fmt.Println(num1 - num2)
 	case "*":
 		fmt.Println("Enter the numbers")
 
-		if _, err := fmt.Scanf("%d %d", &num1, &num2); err != nil {
-			log.Print("  Scan for num1 & num2 failed, due to ", err)
-			return
-		}
+		fmt.Scan(&num1, &num2)
 
 		fmt.Println(num1 * num2)
 	case "%":
 		fmt.Println("Enter the numbers")
 
-		if _, err := fmt.Scanf("%d %d", &num1, &num2); err != nil {
-			log.Print("  Scan for num1 & num2 failed, due to ", err)
-			return
-		}
+		fmt.Scan(&num1, &num2)
 
 		fmt.Println(num1 % num2)
+
+	default:
+		fmt.Println("Wrong operation choice")
 
 	}
 
